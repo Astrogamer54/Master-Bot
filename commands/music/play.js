@@ -22,12 +22,12 @@ module.exports = {
 
     await interaction.deferReply({
       fetchReply: true
-    });
+    }); 
     const voiceChannel = interaction.member.voice.channel;
     if (!voiceChannel) {
       return interaction.followUp('Join a voice channel and try again!');
     }
-    let query = interaction.options.get('query').value; // the user's query
+    let query = interaction.options.get('song').value; // the user's query
 
     let player = client.music.players.get(interaction.guildId);
     if (player && player.channelId !== voiceChannel.id) {
