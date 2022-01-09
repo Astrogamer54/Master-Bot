@@ -1,0 +1,10 @@
+.text .de1, .text .de2 {-moz-user-select: text;-khtml-user-select: text;-webkit-user-select: text;-ms-user-select: text;user-select: text;
+    margin:0; padding: 0 8px; background:none; vertical-align:top;color:#000;border-left: 1px solid #ddd; margin: 0 0 0 -7px; position: relative;}
+    .text  {color:#ACACAC;}
+    .text .imp {font-weight: bold; color: red;}
+    .text li, .text .li1 {-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;-ms-user-select: none;user-select: none;
+    background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);}
+    .text .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+    .text .ln-xtra, .text li.ln-xtra, .text div.ln-xtra {background:#FFFF88;}
+    .text span.xtra { display:block; }
+.text {background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px); border-radius: 10px;}
