@@ -13,6 +13,10 @@ const {
 const { load } = require('@lavaclient/spotify');
 const { LoopType } = require('@lavaclient/queue');
 const NowPlayingEmbed = require('./utils/music/NowPlayingEmbed');
+const http = require("http");
+const fs = require('fs').promises;
+const host = '0.0.0.0';
+const port = 3000;
 
 load({
   client: {
@@ -120,5 +124,22 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args, client));
   }
 }
+const requestListener = function (req, res) {
+  fs.readFile(__dirname + "/index.html")
+  .then(contents => {
+      res.setHeader("Content-Type", "text/html");
+      res.writeHead(200);
+      res.end(contents);
+  })
+  .catch(err => {
+      res.writeHead(500);
+      res.end(err);
+      return;
+  });
+};
 
+const server = http.createServer(requestListener);
+server.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
+});
 client.login(token);
