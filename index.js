@@ -84,7 +84,7 @@ client.on('ready', () => {
 });
 
 client.on('guildCreate', guild => {
-  guild.systemChannel.send({WelcomeEmbed})
+  guild.systemChannel.send({ embeds: [WelcomeEmbed]})
 })
 
 const commandFiles = fs
