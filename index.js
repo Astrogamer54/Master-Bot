@@ -3,7 +3,7 @@ const fs = require('fs');
 const ExtendedClient = require('./utils/ExtendedClient');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { Collection, MessageEmbed, MessageActionRow} = require('discord.js');
+const { Collection, MessageEmbed, MessageActionRow, MessageButton} = require('discord.js');
 const {
   token,
   client_id,
