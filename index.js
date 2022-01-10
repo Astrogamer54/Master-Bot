@@ -84,8 +84,7 @@ client.on('ready', () => {
 });
 
 client.on('guildCreate', guild => {
-  const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
-  channel.send({WelcomeEmbed})
+  guild.systemChannel.send({WelcomeEmbed})
 })
 
 const commandFiles = fs
