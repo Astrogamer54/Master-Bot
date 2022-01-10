@@ -14,7 +14,6 @@ const { load } = require('@lavaclient/spotify');
 const { LoopType } = require('@lavaclient/queue');
 const NowPlayingEmbed = require('./utils/music/NowPlayingEmbed');
 const http = require("http");
-const fs = require('fs').promises;
 const host = '0.0.0.0';
 const port = 3000;
 
@@ -125,7 +124,7 @@ for (const file of eventFiles) {
   }
 }
 const requestListener = function (req, res) {
-  fs.readFile(__dirname + "/index.html")
+  fs.readFile(__dirname + "/web/index.html")
   .then(contents => {
       res.setHeader("Content-Type", "text/html");
       res.writeHead(200);
