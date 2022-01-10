@@ -3,7 +3,7 @@ const fs = require('fs');
 const ExtendedClient = require('./utils/ExtendedClient');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { Collection } = require('discord.js');
+const { Collection, MessageEmbed } = require('discord.js');
 const {
   token,
   client_id,
@@ -13,7 +13,13 @@ const {
 const { load } = require('@lavaclient/spotify');
 const { LoopType } = require('@lavaclient/queue');
 const NowPlayingEmbed = require('./utils/music/NowPlayingEmbed');
-
+const WelcomeEmbed = new MessageEmbed()
+  .setTitle("Thank You For Inviting Rythm Reloaded")
+  .setURL("https://rytm.astrogamer54.com/")
+  .setColor('#920c0c')
+  .setDescription("Rythm is dead. I am not.")
+  .setFooter("Made By Astrogamer54, https://lh6.googleusercontent.com/mdCKOXAmPmNswudMo-qACfMytGGd4vCmqpMQeKJQ5E2uSMzLw2oYgoRYFT3n8-fjIy8kh0d-Cb_lO4WZ7TPkiW4=w16383")
+  .setThumbnail("https://rytm.astrogamer54.com/logo.gif")
 load({
   client: {
     id: spotify_client_id,
@@ -76,6 +82,11 @@ client.on('ready', () => {
   });
   console.log('ready!');
 });
+
+client.on('guildCreate', guild => {
+  const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+  channel.send({WelcomeEmbed})
+})
 
 const commandFiles = fs
   .readdirSync('./commands')
