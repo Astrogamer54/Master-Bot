@@ -20,12 +20,6 @@ const WelcomeEmbed = new MessageEmbed()
   .setDescription("Rythm is dead. I am not.")
   .setFooter("Made By Astrogamer54", "https://lh6.googleusercontent.com/mdCKOXAmPmNswudMo-qACfMytGGd4vCmqpMQeKJQ5E2uSMzLw2oYgoRYFT3n8-fjIy8kh0d-Cb_lO4WZ7TPkiW4=w16383")
   .setThumbnail("https://rytm.astrogamer54.com/logo.gif")
-const row = new MessageActionRow()
-  .addComponents(
-    help,
-    invite,
-    sub
-  );
 let help = new disbut.MessageButton()
   .setStyle('green') //default: blurple
   .setLabel('Help') //default: NO_LABEL_PROVIDED
@@ -38,6 +32,12 @@ let sub = new disbut.MessageButton()
   .setStyle('red') //default: blurple
   .setLabel('Subscribe') //default: NO_LABEL_PROVIDED
   .setURL('https://www.youtube.com/c/Astrogamer54?sub_confirmation=1') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
+const row = new MessageActionRow()
+  .addComponents(
+    help,
+    invite,
+    sub
+  );
 load({
   client: {
     id: spotify_client_id,
