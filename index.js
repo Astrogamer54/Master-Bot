@@ -18,7 +18,7 @@ const WelcomeEmbed = new MessageEmbed()
   .setURL("https://rytm.astrogamer54.com/")
   .setColor('#920c0c')
   .setDescription("Rythm is dead. I am not.")
-  .setFooter("Made By Astrogamer54, https://lh6.googleusercontent.com/mdCKOXAmPmNswudMo-qACfMytGGd4vCmqpMQeKJQ5E2uSMzLw2oYgoRYFT3n8-fjIy8kh0d-Cb_lO4WZ7TPkiW4=w16383")
+  .setFooter("Made By Astrogamer54", "https://lh6.googleusercontent.com/mdCKOXAmPmNswudMo-qACfMytGGd4vCmqpMQeKJQ5E2uSMzLw2oYgoRYFT3n8-fjIy8kh0d-Cb_lO4WZ7TPkiW4=w16383")
   .setThumbnail("https://rytm.astrogamer54.com/logo.gif")
 load({
   client: {
