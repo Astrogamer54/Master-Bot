@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
 const { SpotifyItemType } = require('@lavaclient/spotify');
 
 module.exports = {
@@ -108,6 +108,7 @@ module.exports = {
     const started = player.playing || player.paused;
 
     await interaction.followUp(displayMessage);
+    console.log(displayMessage);
 
     player.queue.add(tracks, {
       requester: interaction.user.id
