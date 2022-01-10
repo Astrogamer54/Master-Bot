@@ -124,17 +124,19 @@ for (const file of eventFiles) {
   }
 }
 const requestListener = function (req, res) {
-  fs.readFile(__dirname + "/web/index.html")
-  .then(contents => {
+  fs.readFile(__dirname + "/web/index.html"), (err) => {
+    contents => {
       res.setHeader("Content-Type", "text/html");
       res.writeHead(200);
       res.end(contents);
-  })
-  .catch(err => {
+    }
+    if (err) { 
       res.writeHead(500);
       res.end(err);
       return;
-  });
+    } 
+  }
+
 };
 
 const server = http.createServer(requestListener);
