@@ -124,7 +124,7 @@ for (const file of eventFiles) {
   }
 }
 const requestListener = function (req, res) {
-  fs.readFile(__dirname + "/web/index.html"), (err) => {
+  fs.readFile(__dirname + "/web/index.html"), function(err, data){
     contents => {
       res.setHeader("Content-Type", "text/html");
       res.writeHead(200);
