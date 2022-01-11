@@ -23,16 +23,15 @@ module.exports = {
     const texttosend = interaction.options.get('message').value;
     console.log(texttosend)
     console.log(user)
-    const texttosend2=toString(texttosend)
-    console.log(texttosend2)
+    console.log(texttosend)
     try{
-      user.send(texttosend2);
+      user.send(texttosend);
     }catch(err){
       return interaction.reply(err);
     }
     const embed = new MessageEmbed()
       .setTitle(user.username)
-      .setDescription(`Dm'ed`, user.username,': ', texttosend2)
+      .setDescription(`Dm'ed ${user.username}: ${texttosend}`)
       .setImage(user.displayAvatarURL({ dynamic: true }))
       .setColor('0x00ae86');
     
