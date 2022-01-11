@@ -6,7 +6,7 @@ if (!tenorAPI) return;
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('animegif')
+    .setName('memegif')
     .setDescription('Responds with a random meme gif'),
   execute(interaction) {
     fetch(`https://g.tenor.com/v1/random?key=${tenorAPI}&q=memes&limit=50`)
