@@ -20,9 +20,9 @@ module.exports = {
 
   execute(interaction) {
     const user = interaction.options.get('user').user;
-    const message = interaction.options.get('message').string;
+    const texttosend = interaction.options.get('message').string;
     try{
-      user.send(message);
+      user.send(texttosend);
     }catch(err){
       return interaction.reply('Could not send DM');
     }
