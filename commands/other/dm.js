@@ -21,6 +21,9 @@ module.exports = {
   execute(interaction) {
     const user = interaction.options.get('user').user;
     const texttosend = interaction.options.get('message').value;
+    console.log(texttosend)
+    console.log(user)
+    console.log(texttosend2)
     const texttosend2=toString(texttosend)
     try{
       user.send(texttosend2);
