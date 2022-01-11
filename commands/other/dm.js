@@ -21,8 +21,9 @@ module.exports = {
   execute(interaction) {
     const user = interaction.options.get('user').user;
     const texttosend = interaction.options.get('message').string;
+    const texttosend2=toString(texttosend)
     try{
-      user.send(texttosend);
+      user.send(texttosend2);
     }catch(err){
       return interaction.reply(err);
     }
