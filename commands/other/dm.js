@@ -24,7 +24,7 @@ module.exports = {
     try{
       user.send(texttosend);
     }catch(err){
-      return interaction.reply('Could not send DM');
+      return interaction.reply(err);
     }
     const embed = new MessageEmbed()
       .setTitle(user.username)
