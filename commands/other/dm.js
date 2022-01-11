@@ -23,8 +23,8 @@ module.exports = {
     const texttosend = interaction.options.get('message').value;
     console.log(texttosend)
     console.log(user)
-    console.log(texttosend2)
     const texttosend2=toString(texttosend)
+    console.log(texttosend2)
     try{
       user.send(texttosend2);
     }catch(err){
