@@ -20,7 +20,7 @@ module.exports = {
 
   execute(interaction) {
     const user = interaction.options.get('user').user;
-    const texttosend = interaction.options.get('message').string;
+    const texttosend = interaction.options.get('message').value;
     const texttosend2=toString(texttosend)
     try{
       user.send(texttosend2);
@@ -29,7 +29,7 @@ module.exports = {
     }
     const embed = new MessageEmbed()
       .setTitle(user.username)
-      .setDescription(`Dm'ed`, user.username,': ', message)
+      .setDescription(`Dm'ed`, user.username,': ', texttosend2)
       .setImage(user.displayAvatarURL({ dynamic: true }))
       .setColor('0x00ae86');
     
