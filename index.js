@@ -96,7 +96,7 @@ client.music.on(
 client.on('ready', () => {
   client.music.connect(client.user.id);
   client.user.setPresence({
-    activities: [{ name: 'Slash commands /', type: 'WATCHING' }]
+    activities: [{ name: 'new website! https://rytm.astrogamer54.com', type: 'PLAYING' }]
   });
   console.log('ready!');
 });
