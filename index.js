@@ -3,7 +3,7 @@ const fs = require('fs');
 const ExtendedClient = require('./utils/ExtendedClient');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { Collection, MessageEmbed, MessageActionRow, MessageButton} = require('discord.js');
+const { Collection } = require('discord.js');
 const {
   token,
   client_id,
@@ -13,31 +13,7 @@ const {
 const { load } = require('@lavaclient/spotify');
 const { LoopType } = require('@lavaclient/queue');
 const NowPlayingEmbed = require('./utils/music/NowPlayingEmbed');
-const WelcomeEmbed = new MessageEmbed()
-  .setTitle("Thank You For Inviting Rythm Reloaded")
-  .setURL("https://rytm.astrogamer54.com/")
-  .setColor('#920c0c')
-  .setDescription("Rythm is dead. I am not.")
-  .setFooter("Made By Astrogamer54", "https://lh6.googleusercontent.com/mdCKOXAmPmNswudMo-qACfMytGGd4vCmqpMQeKJQ5E2uSMzLw2oYgoRYFT3n8-fjIy8kh0d-Cb_lO4WZ7TPkiW4=w16383")
-  .setThumbnail("https://rytm.astrogamer54.com/logo.gif")
-let help = new MessageButton()
-  .setStyle('LINK') //default: blurple
-  .setLabel('Help') //default: NO_LABEL_PROVIDED
-  .setURL('https://rytm.astrogamer54.com/#commands') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
-let invite = new MessageButton()
-  .setStyle('LINK') //default: blurple
-  .setLabel('Invite') //default: NO_LABEL_PROVIDED
-  .setURL('https://discord.com/oauth2/authorize?client_id=913903582082916444&scope=bot&permissions=277062192193') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
-let sub = new MessageButton()
-  .setStyle('LINK') //default: blurple
-  .setLabel('Subscribe') //default: NO_LABEL_PROVIDED
-  .setURL('https://www.youtube.com/c/Astrogamer54?sub_confirmation=1') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
-const row = new MessageActionRow()
-  .addComponents(
-    help,
-    invite,
-    sub
-  );
+
 load({
   client: {
     id: spotify_client_id,
@@ -89,21 +65,17 @@ client.music.on(
       undefined,
       queue.current.length
     );
-    queue.channel.send({ embeds: [embed] },help,invite,sub);
+    queue.channel.send({ embeds: [embed] });
   }
 );
 
 client.on('ready', () => {
   client.music.connect(client.user.id);
   client.user.setPresence({
-    activities: [{ name: 'new website! https://rytm.astrogamer54.com', type: 'PLAYING' }]
+    activities: [{ name: 'Slash commands /', type: 'WATCHING' }]
   });
   console.log('ready!');
 });
-
-client.on('guildCreate', guild => {
-  guild.systemChannel.send({ embeds: [WelcomeEmbed], components: [row] })
-})
 
 const commandFiles = fs
   .readdirSync('./commands')
@@ -148,4 +120,5 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args, client));
   }
 }
+
 client.login(token);

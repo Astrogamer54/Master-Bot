@@ -6,10 +6,10 @@ if (!tenorAPI) return;
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('memegif')
-    .setDescription('Responds with a random meme gif'),
+    .setName('animegif')
+    .setDescription('Responds with a random anime gif'),
   execute(interaction) {
-    fetch(`https://g.tenor.com/v1/random?key=${tenorAPI}&q=memes&limit=50`)
+    fetch(`https://g.tenor.com/v1/random?key=${tenorAPI}&q=anime&limit=50`)
       .then(res => res.json())
       .then(json =>
         interaction.reply(json.results[Math.floor(Math.random() * 49)].url)

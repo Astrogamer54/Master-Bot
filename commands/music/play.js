@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 const { SpotifyItemType } = require('@lavaclient/spotify');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     .setDescription('Play any song or playlist from YouTube and Spotify!')
     .addStringOption(option =>
       option
-        .setName('song')
+        .setName('query')
         .setDescription('What song or playlist would you like to listen to?')
         .setRequired(true)
     ),
@@ -22,12 +22,12 @@ module.exports = {
 
     await interaction.deferReply({
       fetchReply: true
-    }); 
+    });
     const voiceChannel = interaction.member.voice.channel;
     if (!voiceChannel) {
       return interaction.followUp('Join a voice channel and try again!');
     }
-    let song = interaction.options.get('song').value; // the user's song
+    let query = interaction.options.get('query').value; // the user's query
 
     let player = client.music.players.get(interaction.guildId);
     if (player && player.channelId !== voiceChannel.id) {
@@ -38,25 +38,25 @@ module.exports = {
     const queueHistory = interaction.client.queueHistory.get(
       interaction.guildId
     );
-    if (Number(song) && queueHistory.length > 0) {
-      const index = String(Number(song) - 1);
-      song = queueHistory[index].title;
+    if (Number(query) && queueHistory.length > 0) {
+      const index = String(Number(query) - 1);
+      query = queueHistory[index].title;
     }
 
     let tracks = [];
     let displayMessage = '';
 
-    if (client.music.spotify.isSpotifyUrl(song)) {
-      const item = await client.music.spotify.load(song);
+    if (client.music.spotify.isSpotifyUrl(query)) {
+      const item = await client.music.spotify.load(query);
       switch (item.type) {
         case SpotifyItemType.Track:
           const track = await item.resolveYoutubeTrack();
           tracks = [track];
-          displayMessage = `Queued track [**${item.name}**](${song}).`;
+          displayMessage = `Queued track [**${item.name}**](${query}).`;
           break;
         case SpotifyItemType.Artist:
           tracks = await item.resolveYoutubeTracks();
-          displayMessage = `Queued the **Top ${tracks.length} tracks** for [**${item.name}**](${song}).`;
+          displayMessage = `Queued the **Top ${tracks.length} tracks** for [**${item.name}**](${query}).`;
           break;
         case SpotifyItemType.Album:
         case SpotifyItemType.Playlist:
@@ -65,7 +65,7 @@ module.exports = {
             tracks.length
           } tracks** from ${SpotifyItemType[item.type].toLowerCase()} [**${
             item.name
-          }**](${song}).`;
+          }**](${query}).`;
           break;
         default:
           return interaction.followUp({
@@ -75,7 +75,7 @@ module.exports = {
       }
     } else {
       const results = await client.music.rest.loadTracks(
-        /^https?:\/\//.test(song) ? song : `ytsearch:${song}`
+        /^https?:\/\//.test(query) ? query : `ytsearch:${query}`
       );
 
       switch (results.loadType) {
@@ -87,7 +87,7 @@ module.exports = {
           });
         case 'PLAYLIST_LOADED':
           tracks = results.tracks;
-          displayMessage = `Queued playlist [**${results.playlistInfo.name}**](${song}), it has a total of **${tracks.length}** tracks.`;
+          displayMessage = `Queued playlist [**${results.playlistInfo.name}**](${query}), it has a total of **${tracks.length}** tracks.`;
           break;
         case 'TRACK_LOADED':
         case 'SEARCH_RESULT':
@@ -108,7 +108,6 @@ module.exports = {
     const started = player.playing || player.paused;
 
     await interaction.followUp(displayMessage);
-    console.log(displayMessage);
 
     player.queue.add(tracks, {
       requester: interaction.user.id
